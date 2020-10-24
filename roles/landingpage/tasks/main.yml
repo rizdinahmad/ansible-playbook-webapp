@@ -11,6 +11,13 @@
      dest: /var/www/html/landingpage
 
 - name: Copy File Conf Nginx-landingpage
-  templates:
+  template:
      src: templates/landingpage.conf.j2
      dest: /etc/nginx/sites-enabled/landingpage.conf
+  notify:
+     - Restart Nginx
+
+- name: Restart Nginx
+  service:
+     name: nginx
+     state: restarted

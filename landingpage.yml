@@ -1,9 +1,8 @@
 - name: Install WordPress
-  hosts: target
-  remote_user: ubuntu
+  hosts: server1
+  user: ubuntu
   become: yes
   become_method: sudo
   roles:
     - nginx-git
-    - php7
     - landingpage

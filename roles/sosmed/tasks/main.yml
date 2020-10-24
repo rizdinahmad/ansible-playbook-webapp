@@ -11,12 +11,12 @@
      dest: /var/www/html/sosmed
 
 - name: Copy File Conf Nginx-Sosmed
-  templates:
+  template:
      src: templates/sosmed.conf.j2
      dest: /etc/nginx/sites-enabled/sosmed.conf
 
 - name: Copy File config.php
-  templates:
+  template:
      src: templates/config.php.j2
      dest: /var/www/html/sosmed/config.php
 
