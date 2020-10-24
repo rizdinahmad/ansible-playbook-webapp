@@ -1,0 +1,32 @@
+- name: Create Directory Wordpress
+  file: 
+     path: /var/www/html/wordpress
+     mode: 0775
+     state: directory
+     state: absent
+
+- name: Download Wordpress
+  git:
+     repo: https://github.com/WordPress/WordPress.git
+     dest: /var/www/html/wordpress/
+  state: absent
+
+- name: Copy wp-config.php
+  template:
+      src: templates/wp-config.php.j2
+      dest: /var/www/html/wordpress/wp-config.php
+
+- name: Copy File Config Nginx
+  template:
+      src: templates/wp.conf.j2
+      dest: /etc/nginx/sites-enabled/wp.conf
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart php-fpm
+  service:
+    name: php7.2-fpm
+    state: restarted

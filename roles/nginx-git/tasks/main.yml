@@ -1,0 +1,20 @@
+- name: Install Web Server Nginx-Ubuntu
+  apt:
+     name: nginx
+     state: present    
+
+- name: Install Git
+  become: true
+  apt:
+     name: git
+     state: latest
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: start nginx
+  service:
+    name: nginx
+    state: started

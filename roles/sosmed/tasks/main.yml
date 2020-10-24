@@ -1,0 +1,31 @@
+- name: Create Directory Sosmed
+  file:
+     path: /var/www/html/sosmed
+     mode: 0775
+     state: directory
+     state: absent
+
+- name: Clone Sosmed
+  git:
+     repo: https://github.com/rizdinahmad/pesbuk.git
+     dest: /var/www/html/sosmed
+
+- name: Copy File Conf Nginx-Sosmed
+  templates:
+     src: templates/sosmed.conf.j2
+     dest: /etc/nginx/sites-enabled/sosmed.conf
+
+- name: Copy File config.php
+  templates:
+     src: templates/config.php.j2
+     dest: /var/www/html/sosmed/config.php
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: restart php-fpm
+  service:
+    name: php7.2-fpm
+    state: restarted

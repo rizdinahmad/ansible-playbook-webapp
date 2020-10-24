@@ -1,0 +1,16 @@
+- name: Create Directory Sosmed
+  file:
+     path: /var/www/html/landingpage
+     mode: 0775
+     state: directory
+     state: absent
+
+- name: Clone Landingpage
+  git:
+     repo: https://github.com/rizdinahmad/landingpage.git
+     dest: /var/www/html/landingpage
+
+- name: Copy File Conf Nginx-landingpage
+  templates:
+     src: templates/landingpage.conf.j2
+     dest: /etc/nginx/sites-enabled/landingpage.conf
