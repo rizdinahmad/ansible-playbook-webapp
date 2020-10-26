@@ -10,6 +10,11 @@
      repo: https://github.com/rizdinahmad/pesbuk.git
      dest: /var/www/html/sosmed
 
+#- name: Import dump.sql
+#  shell: mysql -h '{{ sosmed_db_host }}' -u '{{sosmed_db_user}}' -p '{{sosmed_db_name}}' < /var/www/html/sosmed/dump.sql
+#  args:
+#     executable: /bin/bash
+
 - name: Copy File Conf Nginx-Sosmed
   template:
      src: templates/sosmed.conf.j2
